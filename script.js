@@ -50,7 +50,9 @@ function addBall() {
 
 
         counterRemainBalls++;
-        gameStarted = true;
+        if (!gameStarted) {  
+            gameStarted = true;  
+        }
         
         // console.log(counterRemainBalls);
 
