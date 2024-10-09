@@ -1,0 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    
+}
+
+#game-board {
+    display: grid;
+    max-width: 80%;
+    margin: 0 auto; 
+    grid-template-columns: repeat(12, 50px); /* 12 תאים ברוחב של 50 פיקסלים */
+    grid-template-rows: repeat(10, 50px); /* 10 תאים בגובה של 50 פיקסלים */
+}
+
+.cell {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: #999; 
+
+    
+}
+
+.wall {
+    background-color: rgb(149, 83, 148);
+}
+
+.ball {
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.player {
+    font-size: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#reset-button {
+    background-color: rgba(172, 172, 27, 0.687); 
+    border: none; 
+    color: black; 
+    padding: 0.5% 2%; 
+    text-align: center; 
+    text-decoration: none; 
+    display: inline-block; 
+    margin: 10px 2px; 
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+}
+
+
+#reset-button:hover {
+    background-color: #45a049; 
+}
+
+
+@media (max-width: 768px) {
+    #game-board {
+        grid-template-columns: repeat(12, 1fr); 
+        grid-template-rows: repeat(10, 50px);
+        width: 100%; 
+        height: auto; 
+    }
+}
+
