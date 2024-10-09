@@ -1,7 +1,7 @@
 const gameBoard = document.getElementById('game-board');
 const cells = [];
-let counterRemainBalls=0;
-let gameStarted=false;
+let counterRemainBalls = 0;
+let gameStarted = false;
 let playerPosition = null;
 const wallCells = [];
 const portalCells = {
@@ -23,8 +23,8 @@ function createBoard() {
                 cell.classList.add('portal');
             }
             else {
-                cell.classList.add('wall'); // הוספת מחלקה לתא הקיר
-                wallCells.push(i);             // שמירת אינדקס הקיר
+                cell.classList.add('wall'); 
+                wallCells.push(i);   // שמירת אינדקס הקיר
             }
         }
 
@@ -48,7 +48,10 @@ function addBall() {
         const ball = createBall();
         cell.appendChild(ball);
 
+
         counterRemainBalls++;
+        gameStarted = true;
+        
         // console.log(counterRemainBalls);
 
     }
@@ -75,7 +78,7 @@ function movePlayer(direction) {
         case 'up':
             if (newPosition === portalCells.top) {
                 newPosition = portalCells.bottom;
-            }else if (newPosition - 12 >= 0) newPosition -= 12;
+            } else if (newPosition - 12 >= 0) newPosition -= 12;
             break;
         case 'down':
             if (newPosition === portalCells.bottom) {
@@ -86,14 +89,14 @@ function movePlayer(direction) {
             break;
         case 'left':
             if (newPosition === portalCells.left) {
-                newPosition = portalCells.right; 
+                newPosition = portalCells.right;
             } else if (newPosition % 12 !== 0) {
                 newPosition -= 1;
             }
             break;
         case 'right':
             if (newPosition === portalCells.right) {
-                newPosition = portalCells.left; 
+                newPosition = portalCells.left;
             } else if (newPosition % 12 !== 11) {
                 newPosition += 1;
             }
@@ -101,7 +104,7 @@ function movePlayer(direction) {
     }
     if (wallCells.includes(newPosition)) return;
 
-    if(cells[newPosition].querySelector('.ball')){
+    if (cells[newPosition].querySelector('.ball')) {
         cells[newPosition].innerHTML = '';
         counterRemainBalls--;
         console.log(counterRemainBalls);
@@ -113,7 +116,7 @@ function movePlayer(direction) {
 
     const player = document.createElement('div');
     player.classList.add('player');
-    player.textContent = '😁'; 
+    player.textContent = '😁';
     cells[playerPosition].appendChild(player);
 
     checkWinLooseGame();
@@ -122,21 +125,22 @@ function resetGame() {
     location.reload();
 }
 
-function checkWinLooseGame(){
-    if(gameStarted&&counterRemainBalls==0){
-        alert('you won!')
-        // setTimeout()
+let gameWon = false;
+
+function checkWinLooseGame() {
+    if (gameStarted && counterRemainBalls == 0 && !gameWon) {
+        gameWon = true; 
+        setTimeout(() => {
+            alert('You won!');
+            resetGame();
+        }, 500);
     }
-    
-    
 }
 
 
+
 document.addEventListener('keydown', function (event) {
-    if (!gameStarted) {
-        gameStarted = true;  
-        console.log(gameStarted);
-    }
+
 
     switch (event.key) {
         case 'ArrowUp':
